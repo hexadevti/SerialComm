@@ -93,7 +93,7 @@ namespace Serial
                     while ((bytesRead = source.Read(buffer, 0, buffer.Length)) > 0)
                     {
                         //Console.WriteLine("write " + pos.ToString("X") + " " + string.Join(' ', buffer.Select(x => x.ToString("X")).Take(bytesRead).ToArray()));
-                        port.WriteLine("write " + pos.ToString("X") + " " + string.Join(' ', buffer.Select(x => x.ToString("X")).Take(bytesRead).ToArray()));
+                        port.WriteLine("w " + pos.ToString("X") + " " + string.Join(' ', buffer.Select(x => x.ToString("X")).Take(bytesRead).ToArray()));
                         pos = pos + buffer.Length;
                         Thread.Sleep(500);
                      
@@ -101,7 +101,8 @@ namespace Serial
 
                     while (true)
                     {
-                        port.WriteLine(Console.ReadLine());
+                        if (!ReadLine())
+                        return;
                     }
                 }
             }
@@ -129,8 +130,21 @@ namespace Serial
 
                 while (true)
                 {
-                    port.WriteLine(Console.ReadLine());
+                    if (!ReadLine())
+                        return;
                 }
+            }
+        }
+
+        static bool ReadLine() 
+        {
+            string line = Console.ReadLine();
+            if (line.ToLower() == "exit" || line.ToLower() == "quit" ) {
+                return false;
+            }
+            else {
+                port.WriteLine(line);
+                return true;
             }
         }
 

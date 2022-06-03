@@ -13,8 +13,8 @@
             "args": [
                 "com5",
                 "115200",
-                "bubbo_world.rom",
-                "2000"
+                // "bubbo_world.rom",
+                // "2000"
             ],
             "cwd": "${workspaceFolder}",
             "stopAtEntry": false,
